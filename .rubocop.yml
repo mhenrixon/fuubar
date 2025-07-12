@@ -1,10 +1,185 @@
 ---
-inherit_from:
-  - ".rubocop_core.yml"
-  - ".rubocop_performance.yml"
-  - ".rubocop_rspec.yml"
-  - ".rubocop_capybara.yml"
-  - ".rubocop_factory_bot.yml"
-  - ".rubocop_rspec_rails.yml"
-  - ".rubocop_local.yml"
-# Put your project-specific Rubocop configuration in .rubocop_local.yml
+plugins:
+  - rubocop-capybara
+  - rubocop-factory_bot
+  - rubocop-performance
+  - rubocop-rake
+  - rubocop-rspec
+  - rubocop-rspec_rails
+
+AllCops:
+  TargetRubyVersion: 3.2
+  DisabledByDefault: false
+  DisplayCopNames: true
+  NewCops: enable
+  Exclude:
+    - "**/bin/*"
+    - "**/config.ru"
+    - "**/db/**/*"
+    - "**/node_modules/**/*"
+    - "**/vendor/**/*"
+    - "**/vendor/**/*.txt"
+    - "**/test/**/*"
+    - "**/tmp/**/*"
+
+# Dim down rubocop's annoyance level below:
+
+FactoryBot/SyntaxMethods:
+  Enabled: false
+
+
+Layout/ArgumentAlignment:
+  Enabled: true
+  EnforcedStyle: with_fixed_indentation
+
+Layout/CaseIndentation:
+  Enabled: true
+  EnforcedStyle: end
+
+Layout/EndAlignment:
+  Enabled: true
+  EnforcedStyleAlignWith: variable
+  AutoCorrect: true
+
+Layout/LineLength:
+  Exclude:
+    - app/views/**/*.rb
+    - app/components/**/*.rb
+    - app/models/mailer_views/**/*.rb
+    - lib/generators/**/*.rb
+  Max: 125
+
+Layout/SpaceInsideBlockBraces:
+  Enabled: true
+  EnforcedStyleForEmptyBraces: space
+
+Layout/SpaceInsideArrayLiteralBrackets:
+  EnforcedStyle: no_space
+
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: true
+  EnforcedStyle: space
+  EnforcedStyleForEmptyBraces: no_space
+
+
+
+Lint/MissingSuper:
+  Enabled: false
+
+
+
+Metrics:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: true
+  Exclude:
+    - app/api_clients/**/*.rb
+
+Naming/MethodParameterName:
+  Enabled: true
+  Exclude:
+    - app/api_clients/**/*.rb
+
+Naming/VariableName:
+  Enabled: true
+  Exclude:
+    - app/api_clients/**/*.rb
+
+
+
+RSpec/ContextWording:
+  Enabled: true
+  Prefixes:
+    - and
+    - as
+    - for
+    - if
+    - in
+    - or
+    - unless
+    - when
+    - with
+    - without
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/IndexedLet:
+  Enabled: false
+
+RSpec/AlignLeftLetBrace:
+  Enabled: true
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 4
+
+RSpec/PendingWithoutReason:
+  Enabled: false
+
+RSpec/PredicateMatcher:
+  Enabled: false
+
+RSpec/SpecFilePathFormat:
+  Enabled: false
+
+# TODO: Consider if this is needed
+RSpecRails/InferredSpecType:
+  Enabled: false
+
+
+
+
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: nested
+  Exclude:
+    - app/events/**/*.rb
+    # - app/views/**/*.rb
+
+Style/CommentedKeyword:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/EmptyMethod:
+  Enabled: false
+
+Style/FormatStringToken:
+  EnforcedStyle: template
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  EnforcedStyle: never
+
+Style/HashSyntax:
+  Enabled: true
+  EnforcedShorthandSyntax: always
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    default: "()"
+    "%i": "[]"
+    "%I": "[]"
+    "%r": "{}"
+    "%w": "[]"
+    "%W": "[]"
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
