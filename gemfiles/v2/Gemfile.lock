@@ -2,8 +2,10 @@ PATH
   remote: .
   specs:
     fuubar (2.5.2)
+      ostruct
       rspec-core (~> 3.0)
       ruby-progressbar (~> 1.4)
+      stringio
 
 GEM
   remote: https://rubygems.org/
@@ -14,6 +16,7 @@ GEM
     json (2.12.2)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
+    ostruct (0.6.2)
     parallel (1.27.0)
     parser (3.3.8.0)
       ast (~> 2.4.1)
@@ -67,6 +70,7 @@ GEM
     rubocop-rspec_rails (2.29.1)
       rubocop (~> 1.61)
     ruby-progressbar (1.13.0)
+    stringio (3.1.7)
     unicode-display_width (3.1.4)
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)

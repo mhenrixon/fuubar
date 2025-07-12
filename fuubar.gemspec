@@ -29,6 +29,8 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency             'rspec-core',       ["~> 3.0"]
   spec.add_dependency             'ruby-progressbar', ["~> 1.4"]
+  spec.add_dependency             'ostruct'
+  spec.add_dependency             'stringio'
 
   spec.add_development_dependency 'rspec',            ["~> 3.7"]
 end
