@@ -26,8 +26,8 @@ Gem::Specification.new do |spec|
     "rubygems_mfa_required" => "true",
   }
 
-  spec.add_dependency             "ostruct"
-  spec.add_dependency             "rspec-core", ["~> 3.0"]
-  spec.add_dependency             "ruby-progressbar", ["~> 1.4"]
-  spec.add_dependency             "stringio"
+  spec.add_dependency "ostruct"
+  spec.add_dependency "rspec-core", ["~> 3.0"]
+  spec.add_dependency "ruby-progressbar", ["~> 1.4"]
+  spec.add_dependency "stringio"
 end
