@@ -4,6 +4,7 @@ require 'rspec/core'
 require 'rspec/core/formatters/base_text_formatter'
 require 'ruby-progressbar'
 require 'fuubar/output'
+require 'set'
 
 RSpec.configuration.add_setting :fuubar_progress_bar_options,   :default => {}
 RSpec.configuration.add_setting :fuubar_auto_refresh,           :default => false
@@ -13,13 +14,9 @@ class Fuubar < RSpec::Core::Formatters::BaseTextFormatter
   DEFAULT_PROGRESS_BAR_OPTIONS = { :format => ' %c/%C |%w>%i| %e ' }.freeze
 
   ::RSpec::Core::Formatters.register self,
-                                     :close,
-                                     :dump_failures,
-                                     :dump_pending,
                                      :example_failed,
                                      :example_passed,
                                      :example_pending,
-                                     :message,
                                      :start
 
   attr_accessor :example_tick_lock,
@@ -43,6 +40,7 @@ class Fuubar < RSpec::Core::Formatters::BaseTextFormatter
                               :output    => output,
                               :autostart => false)
     )
+    @printed_examples = Set.new
   end
 
   def start(notification)
@@ -57,14 +55,16 @@ class Fuubar < RSpec::Core::Formatters::BaseTextFormatter
     self.passed_count  = 0
     self.pending_count = 0
     self.failed_count  = 0
+    @printed_examples  = Set.new
 
     super
 
     with_current_color { progress.start }
   end
 
-  def close(_notification)
-    example_tick_thread.kill
+  def close(notification)
+    @example_tick_thread.kill if @example_tick_thread
+    super
   end
 
   def example_passed(_notification)
@@ -82,10 +82,16 @@ class Fuubar < RSpec::Core::Formatters::BaseTextFormatter
   def example_failed(notification)
     self.failed_count += 1
 
-    progress.clear
+    # Avoid printing the same failure multiple times
+    example_id = "#{notification.example.location}:#{notification.example.description}"
+    unless @printed_examples.include?(example_id)
+      @printed_examples.add(example_id)
 
-    output.puts notification.fully_formatted(failed_count)
-    output.puts
+      progress.clear
+
+      output.puts notification.fully_formatted(failed_count)
+      output.puts
+    end
 
     increment
   end
@@ -97,7 +103,7 @@ class Fuubar < RSpec::Core::Formatters::BaseTextFormatter
   end
 
   def example_tick_thread
-    ::Thread.new do
+    @example_tick_thread ||= ::Thread.new do
       loop do
         sleep(1)
 
@@ -116,18 +122,28 @@ class Fuubar < RSpec::Core::Formatters::BaseTextFormatter
     end
   end
 
-  def dump_failures(_notification)
-    #
-    # We output each failure as it happens so we don't need to output them en
-    # masse at the end of the run.
-    #
+  def dump_failures(notification)
+    # We output each failure as it happens in example_failed,
+    # so we don't need to output them again at the end.
+    # Overriding this prevents BaseTextFormatter from outputting them again.
   end
 
   def dump_pending(notification)
     return unless configuration.fuubar_output_pending_results
-
     super
   end
+
+  def dump_summary(summary)
+    super
+  end
+
+  def seed(notification)
+    super
+  end
+
+
+
+
 
   def output
     @fuubar_output ||= ::Fuubar::Output.new(super, configuration.tty?) # rubocop:disable Naming/MemoizedInstanceVariableName
