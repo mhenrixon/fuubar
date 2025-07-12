@@ -5,6 +5,7 @@ group :console do
 end
 
 group :development do
+  gem "gem-release"
   gem "rspec"
   gem "rubocop"
   gem "rubocop-capybara"
