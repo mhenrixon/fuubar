@@ -18,7 +18,7 @@ class TestTtyOutputClass
   end
 end
 
-class    Fuubar < ::RSpec::Core::Formatters::BaseTextFormatter
+class    Fuubar < RSpec::Core::Formatters::BaseTextFormatter
 describe Output do
   it 'delegates anything to the passed in object' do
     output = Output.new(::TestTtyOutputClass.new)

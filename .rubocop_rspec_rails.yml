@@ -1,0 +1,13 @@
+---
+# Configuration for rubocop-rspec_rails
+
+plugins:
+  - rubocop-rspec_rails
+
+################################################################################
+#                              RSPEC/RAILS
+################################################################################
+
+RSpecRails/HttpStatus:
+  Enabled: true
+  EnforcedStyle: "numeric"

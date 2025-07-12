@@ -1,0 +1,15 @@
+---
+# Configuration for rubocop-capybara
+
+plugins:
+  - rubocop-capybara
+
+################################################################################
+#                                 CAPYBARA
+################################################################################
+
+Capybara/CurrentPathExpectation:
+  Enabled: true
+
+Capybara/VisibilityMatcher:
+  Enabled: true

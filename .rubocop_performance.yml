@@ -1,147 +1,146 @@
 ---
-
 # Last updated to 1.9.1
 
-require:
-  - 'rubocop-performance'
+plugins:
+  - rubocop-performance
 
 ################################################################################
 #                                PERFORMANCE
 ################################################################################
 
 Performance/AncestorsInclude:
-  Enabled:                                    true
+  Enabled: true
 
 # Mistakenly created: https://github.com/rubocop-hq/rubocop-performance/pull/199/files
 Performance/ArraySemiInfiniteRangeSlice:
-  Enabled:                                    false
+  Enabled: false
 
 Performance/BigDecimalWithNumericArgument:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/BindCall:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/BlockGivenWithExplicitBlock:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/Caller:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/Casecmp:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/CaseWhenSplat:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/ChainArrayAllocation:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/CollectionLiteralInLoop:
-  Enabled:                                    true
-  MinSize:                                    1
+  Enabled: true
+  MinSize: 1
   Exclude:
-    - '**/spec/**/*.rb'
+    - "**/spec/**/*.rb"
 
 Performance/CompareWithBlock:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/ConstantRegexp:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/Count:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/DeletePrefix:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/DeleteSuffix:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/Detect:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/DoubleStartEndWith:
-  Enabled:                                    true
-  IncludeActiveSupportAliases:                true
+  Enabled: true
+  IncludeActiveSupportAliases: true
 
 Performance/EndWith:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/FixedSize:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/FlatMap:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/InefficientHashSearch:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/IoReadlines:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/MethodObjectAsBlock:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/OpenStruct:
-  Enabled:                                    true
+  Enabled: true
   Exclude:
-    - '**/spec/**/*.rb'
+    - "**/spec/**/*.rb"
 
 Performance/RangeInclude:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/RedundantBlockCall:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/RedundantMatch:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/RedundantMerge:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/RedundantSortBlock:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/RedundantStringChars:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/RegexpMatch:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/ReverseEach:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/ReverseFirst:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/Size:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/SortReverse:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/Squeeze:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/StartWith:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/StringInclude:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/StringReplacement:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/Sum:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/TimesMap:
-  Enabled:                                    true
-  AutoCorrect:                                true
+  Enabled: true
+  AutoCorrect: true
 
 Performance/UnfreezeString:
-  Enabled:                                    true
+  Enabled: true
 
 Performance/UriDefaultParser:
-  Enabled:                                    true
+  Enabled: true

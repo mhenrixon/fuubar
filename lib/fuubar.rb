@@ -5,11 +5,11 @@ require 'rspec/core/formatters/base_text_formatter'
 require 'ruby-progressbar'
 require 'fuubar/output'
 
-::RSpec.configuration.add_setting :fuubar_progress_bar_options,   :default => {}
-::RSpec.configuration.add_setting :fuubar_auto_refresh,           :default => false
-::RSpec.configuration.add_setting :fuubar_output_pending_results, :default => true
+RSpec.configuration.add_setting :fuubar_progress_bar_options,   :default => {}
+RSpec.configuration.add_setting :fuubar_auto_refresh,           :default => false
+RSpec.configuration.add_setting :fuubar_output_pending_results, :default => true
 
-class Fuubar < ::RSpec::Core::Formatters::BaseTextFormatter
+class Fuubar < RSpec::Core::Formatters::BaseTextFormatter
   DEFAULT_PROGRESS_BAR_OPTIONS = { :format => ' %c/%C |%w>%i| %e ' }.freeze
 
   ::RSpec::Core::Formatters.register self,
@@ -159,8 +159,8 @@ class Fuubar < ::RSpec::Core::Formatters::BaseTextFormatter
     end
   end
 
-  def color_code_for(*args)
-    ::RSpec::Core::Formatters::ConsoleCodes.console_code_for(*args)
+  def color_code_for(*)
+    ::RSpec::Core::Formatters::ConsoleCodes.console_code_for(*)
   end
 
   def configuration
@@ -168,7 +168,7 @@ class Fuubar < ::RSpec::Core::Formatters::BaseTextFormatter
   end
 
   def continuous_integration?
-    @continuous_integration ||= \
-      ![nil, '', 'false'].include?(ENV['CONTINUOUS_INTEGRATION'])
+    @continuous_integration ||=
+      ![nil, '', 'false'].include?(ENV.fetch('CONTINUOUS_INTEGRATION', nil))
   end
 end

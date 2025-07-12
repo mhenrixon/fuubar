@@ -1,9 +1,10 @@
 ---
-
 inherit_from:
-  - '.rubocop_core.yml'
-  - '.rubocop_performance.yml'
-  - '.rubocop_rspec.yml'
-  - '.rubocop_local.yml'
-
+  - ".rubocop_core.yml"
+  - ".rubocop_performance.yml"
+  - ".rubocop_rspec.yml"
+  - ".rubocop_capybara.yml"
+  - ".rubocop_factory_bot.yml"
+  - ".rubocop_rspec_rails.yml"
+  - ".rubocop_local.yml"
 # Put your project-specific Rubocop configuration in .rubocop_local.yml

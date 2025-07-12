@@ -1,0 +1,18 @@
+---
+# Configuration for rubocop-factory_bot
+
+plugins:
+  - rubocop-factory_bot
+
+################################################################################
+#                                FACTORY_BOT
+################################################################################
+
+FactoryBot/AttributeDefinedStatically:
+  Enabled: true
+
+FactoryBot/CreateList:
+  Enabled: true
+
+FactoryBot/FactoryClassName:
+  Enabled: true
