@@ -32,6 +32,10 @@ class Fuubar < RSpec::Core::Formatters::BaseTextFormatter
     super
 
     self.example_tick_lock = ::Mutex.new
+    # Initialize counts to handle cases where example methods might be called before start
+    self.passed_count  = 0
+    self.pending_count = 0
+    self.failed_count  = 0
     self.progress = ::ProgressBar.create(
                       DEFAULT_PROGRESS_BAR_OPTIONS.
                         merge(:throttle_rate => continuous_integration? ? 1.0 : nil).
@@ -105,7 +109,7 @@ class Fuubar < RSpec::Core::Formatters::BaseTextFormatter
   end
 
   def message(notification)
-    if progress.respond_to? :log
+    if progress && progress.respond_to?(:log)
       progress.log(notification.message)
     else
       super
@@ -132,17 +136,22 @@ class Fuubar < RSpec::Core::Formatters::BaseTextFormatter
   private
 
   def increment
+    return unless progress
+    # Don't increment if total is 0 to avoid "0 out of 0" progress bar errors
+    return if progress.total == 0
     with_current_color { progress.increment }
   end
 
   def refresh
+    return unless progress
     with_current_color { progress.refresh }
   end
 
   def with_current_color
-    output.print "\e[#{color_code_for(current_color)}m" if color_enabled?
+    return yield unless color_enabled?
+    output.print "\e[#{color_code_for(current_color)}m"
     yield
-    output.print "\e[0m"                                if color_enabled?
+    output.print "\e[0m"
   end
 
   def color_enabled?
